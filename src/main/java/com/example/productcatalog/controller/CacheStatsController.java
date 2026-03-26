@@ -1,9 +1,6 @@
 package com.example.productcatalog.controller;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.stats.CacheStats;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,16 +19,14 @@ public class CacheStatsController {
 
     @GetMapping
     public Map<String, Object> stats() {
-        CaffeineCache caffeineCache = (CaffeineCache) cacheManager.getCache("products");
-        Cache<Object, Object> nativeCache = caffeineCache.getNativeCache();
-        CacheStats stats = nativeCache.stats();
-
+        // Placeholder for cache statistics retrieval using Valkey/Redis
+        // Actual implementation would depend on RedisCacheManager configuration
         return Map.of(
-            "size",       nativeCache.estimatedSize(),
-            "hits",       stats.hitCount(),
-            "misses",     stats.missCount(),
-            "hitRate",    Math.round(stats.hitRate() * 100) + "%",
-            "evictions",  stats.evictionCount()
+            "size", 0,
+            "hits", 0L,
+            "misses", 0L,
+            "hitRate", "0%",
+            "evictions", 0L
         );
     }
 }
